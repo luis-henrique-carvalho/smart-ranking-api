@@ -1,7 +1,7 @@
 version: '3.8'
 
 services:
-  smart-ranking-db:
+  db:
     image: postgres:latest
     ports:
       - "5432:5432"
@@ -11,3 +11,6 @@ services:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_DB: ${POSTGRES_DB}
+
+volumes:
+  db:
