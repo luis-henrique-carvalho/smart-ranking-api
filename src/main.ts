@@ -10,9 +10,10 @@ async function bootstrap() {
     .setDescription('The cats API description')
     .setVersion('1.0')
     .addServer('http://localhost:3000/', 'Local environment')
-    .addTag('cats')
     .build();
+
   const documentFactory = () => SwaggerModule.createDocument(app, config);
+
   SwaggerModule.setup('api-docs', app, documentFactory);
 
   await app.listen(process.env.PORT ?? 3000);
