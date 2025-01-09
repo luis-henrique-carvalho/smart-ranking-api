@@ -1,1 +1,7 @@
-export class Player {}
+export class Player {
+  id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  phoneNumber: string;
+}

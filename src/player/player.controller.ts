@@ -10,19 +10,24 @@ import {
 import { PlayerService } from './player.service';
 import { CreatePlayerDto } from './dto/create-player.dto';
 import { UpdatePlayerDto } from './dto/update-player.dto';
+import { ApiBody } from '@nestjs/swagger';
 
 @Controller('player')
 export class PlayerController {
   constructor(private readonly playerService: PlayerService) {}
 
   @Post()
+  @ApiBody({
+    type: CreatePlayerDto,
+    description: 'Json structure for user object',
+  })
   create(@Body() createPlayerDto: CreatePlayerDto) {
     return this.playerService.create(createPlayerDto);
   }
 
   @Get()
-  async findAll() {
-    return await this.playerService.findAll();
+  findAll() {
+    return this.playerService.findAll();
   }
 
   @Get(':id')
