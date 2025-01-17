@@ -5,6 +5,6 @@ metadata:
   annotations:
     github.com/project-slug: luis-henrique-carvalho/smart-ranking-api
 spec:
-  type: other
-  lifecycle: unknown
+  type: service
+  lifecycle: experimental
   owner: guests
