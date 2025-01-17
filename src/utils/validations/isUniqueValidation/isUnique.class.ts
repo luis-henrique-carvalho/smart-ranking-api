@@ -5,7 +5,7 @@ import {
   ValidatorConstraint,
   ValidatorConstraintInterface,
 } from 'class-validator';
-import { PrismaService } from 'src/prisma/prisma.service';
+import { PrismaService } from '../../../prisma/prisma.service';
 import { IsUniqeInterface } from './isUnique.decorator';
 
 @ValidatorConstraint({ name: 'IsUniqueConstraint', async: true })

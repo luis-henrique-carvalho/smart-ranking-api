@@ -1,5 +1,5 @@
 import { IsEmail, IsNotEmpty, IsString } from 'class-validator';
-import { isUnique } from 'src/utils/validations/isUniqueValidation/isUnique.decorator';
+import { isUnique } from '../../utils/validations/isUniqueValidation/isUnique.decorator';
 
 export class CreateUserDto {
   /**
@@ -28,5 +28,6 @@ export class CreateUserDto {
    * @example 123456789
    */
   @IsString()
+  @isUnique({ tableName: 'User', column: 'phoneNumber' })
   phoneNumber: string;
 }
