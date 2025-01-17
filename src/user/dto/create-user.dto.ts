@@ -1,7 +1,7 @@
 import { IsEmail, IsNotEmpty, IsString } from 'class-validator';
 import { isUnique } from 'src/utils/validations/isUniqueValidation/isUnique.decorator';
 
-export class CreatePlayerDto {
+export class CreateUserDto {
   /**
    * @example John
    */
@@ -21,7 +21,7 @@ export class CreatePlayerDto {
    */
   @IsEmail()
   @IsNotEmpty()
-  @isUnique({ tableName: 'player', column: 'email' })
+  @isUnique({ tableName: 'User', column: 'email' })
   email: string;
 
   /**
