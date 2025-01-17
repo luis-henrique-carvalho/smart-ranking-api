@@ -4,6 +4,7 @@ metadata:
   name: smart-ranking-api
   annotations:
     github.com/project-slug: luis-henrique-carvalho/smart-ranking-api
+    backstage.io/techdocs-ref: luis-henrique-carvalho/smart-ranking-api
 spec:
   type: service
   lifecycle: experimental
