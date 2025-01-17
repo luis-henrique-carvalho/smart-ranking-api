@@ -10,17 +10,12 @@ import {
 import { PlayerService } from './player.service';
 import { CreatePlayerDto } from './dto/create-player.dto';
 import { UpdatePlayerDto } from './dto/update-player.dto';
-import { ApiBody } from '@nestjs/swagger';
 
 @Controller('player')
 export class PlayerController {
   constructor(private readonly playerService: PlayerService) {}
 
   @Post()
-  @ApiBody({
-    type: CreatePlayerDto,
-    description: 'Json structure for user object',
-  })
   create(@Body() createPlayerDto: CreatePlayerDto) {
     return this.playerService.create(createPlayerDto);
   }
@@ -33,6 +28,11 @@ export class PlayerController {
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.playerService.findOne(id);
+  }
+
+  @Get('by-email/:email')
+  findOneByEmail(@Param('email') email: string) {
+    return this.playerService.findOneByEmail(email);
   }
 
   @Patch(':id')

@@ -23,6 +23,12 @@ export class PlayerService {
     });
   }
 
+  findOneByEmail(email: string) {
+    return this.prisma.player.findUnique({
+      where: { email },
+    });
+  }
+
   update(id: string, updatePlayerDto: UpdatePlayerDto) {
     return this.prisma.player.update({
       where: { id },
