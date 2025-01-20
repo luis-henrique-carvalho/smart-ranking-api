@@ -1,5 +1,5 @@
-import { CreateUserDto } from 'src/user/dto/create-user.dto';
-import { User } from '../../user/entities/user.entity';
+import { CreateUserDto } from 'src/modules/user/dto/create-user.dto';
+import { User } from '../../modules/user/entities/user.entity';
 
 export const userListMock: User[] = [
   {
