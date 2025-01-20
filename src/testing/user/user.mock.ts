@@ -6,21 +6,21 @@ export const userListMock: User[] = [
     id: '1',
     firstName: 'Test',
     lastName: 'User',
-    email: 'teste1@teste.com',
+    email: 'teste1@example.com',
     phoneNumber: '1234567891',
   },
   {
     id: '2',
     firstName: 'Test',
     lastName: 'User',
-    email: 'teste2@teste.com',
+    email: 'teste2@example.com',
     phoneNumber: '1234567892',
   },
   {
     id: '3',
     firstName: 'Test',
     lastName: 'User',
-    email: 'teste3@teste.com',
+    email: 'teste3@example.com',
     phoneNumber: '1234567893',
   },
 ];
@@ -29,7 +29,7 @@ export const userMock: User = {
   id: '1',
   firstName: 'Test',
   lastName: 'User',
-  email: 'teste1@teste.com',
+  email: 'teste1@example.com',
   phoneNumber: '1234567891',
 };
 

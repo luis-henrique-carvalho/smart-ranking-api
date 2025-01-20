@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { UserService } from './user.service';
 import { PrismaService } from '../prisma/prisma.service';
 import { prismaMock } from '../prisma/prisma.service.mock';
-import { userDtoMock, userListMock } from '../testing/user/user.mock';
+import { userDtoMock, userListMock, userMock } from '../testing/user/user.mock';
 
 describe('UserService', () => {
   let service: UserService;
@@ -59,14 +59,13 @@ describe('UserService', () => {
 
   describe('findOne', () => {
     it('should return a user by ID', async () => {
-      const id = '1';
-      const user = { id, email: 'test@example.com', firstName: 'Test User' };
+      const id = userMock.id;
 
-      prismaMock.user.findUnique.mockResolvedValue(user);
+      prismaMock.user.findUnique.mockResolvedValue(userMock);
 
       const result = await service.findOne(id);
 
-      expect(result).toEqual(user);
+      expect(result).toEqual(userMock);
       expect(prismaMock.user.findUnique).toHaveBeenCalledWith({
         where: { id },
       });
@@ -86,14 +85,13 @@ describe('UserService', () => {
 
   describe('findOneByEmail', () => {
     it('should return a user by email', async () => {
-      const email = 'test@example.com';
-      const user = { id: '1', email, firstName: 'Test User' };
+      const email = userMock.email;
 
-      prismaMock.user.findUnique.mockResolvedValue(user);
+      prismaMock.user.findUnique.mockResolvedValue(userMock);
 
       const result = await service.findOneByEmail(email);
 
-      expect(result).toEqual(user);
+      expect(result).toEqual(userMock);
       expect(prismaMock.user.findUnique).toHaveBeenCalledWith({
         where: { email },
       });
@@ -113,7 +111,7 @@ describe('UserService', () => {
 
   describe('update', () => {
     it('should update a user by ID', async () => {
-      const id = '1';
+      const id = userMock.id;
       const updateDto = { firstName: 'Updated firstName' };
       const updatedUser = { id, ...updateDto };
 
@@ -131,18 +129,13 @@ describe('UserService', () => {
 
   describe('remove', () => {
     it('should delete a user by ID', async () => {
-      const id = '1';
-      const deletedUser = {
-        id,
-        email: 'test@example.com',
-        firstName: 'Test User',
-      };
+      const id = userMock.id;
 
-      prismaMock.user.delete.mockResolvedValue(deletedUser);
+      prismaMock.user.delete.mockResolvedValue(userMock);
 
       const result = await service.remove(id);
 
-      expect(result).toEqual(deletedUser);
+      expect(result).toEqual(userMock);
       expect(prismaMock.user.delete).toHaveBeenCalledWith({
         where: { id },
       });
