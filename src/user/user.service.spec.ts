@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { UserService } from './user.service';
 import { PrismaService } from '../prisma/prisma.service';
 import { prismaMock } from '../prisma/prisma.service.mock';
-import { CreateUserDto } from './dto/create-user.dto';
+import { userDtoMock, userListMock } from '../testing/user/user.mock';
 
 describe('UserService', () => {
   let service: UserService;
@@ -33,36 +33,26 @@ describe('UserService', () => {
 
   describe('create', () => {
     it('should create a user', async () => {
-      const dto: CreateUserDto = {
-        email: 'test@example.com',
-        firstName: 'Test',
-        lastName: 'User',
-        phoneNumber: '1234567890',
-      };
-
-      const createdUser = { id: '1', ...dto };
+      const createdUser = { id: '1', ...userDtoMock };
 
       prismaMock.user.create.mockResolvedValue(createdUser);
 
-      const result = await service.create(dto);
+      const result = await service.create(userDtoMock);
 
       expect(result).toEqual(createdUser);
-      expect(prismaMock.user.create).toHaveBeenCalledWith({ data: dto });
+      expect(prismaMock.user.create).toHaveBeenCalledWith({
+        data: userDtoMock,
+      });
     });
   });
 
   describe('findAll', () => {
     it('should return an array of users', async () => {
-      const users = [
-        { id: '1', email: 'user1@example.com', firstName: 'User 1' },
-        { id: '2', email: 'user2@example.com', firstName: 'User 2' },
-      ];
-
-      prismaMock.user.findMany.mockResolvedValue(users);
+      prismaMock.user.findMany.mockResolvedValue(userListMock);
 
       const result = await service.findAll();
 
-      expect(result).toEqual(users);
+      expect(result).toEqual(userListMock);
       expect(prismaMock.user.findMany).toHaveBeenCalledTimes(1);
     });
   });
