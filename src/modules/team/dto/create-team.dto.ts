@@ -6,10 +6,10 @@ export class CreateTeamDto {
    */
   @IsString()
   @IsNotEmpty()
-  firstName: string;
+  name: string;
 
   /**
-   * @example This is a team description
+   * @example "Team Description"
    */
   @IsString()
   @IsNotEmpty()
