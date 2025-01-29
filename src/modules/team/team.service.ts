@@ -1,26 +1,72 @@
-import { Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { CreateTeamDto } from './dto/create-team.dto';
 import { UpdateTeamDto } from './dto/update-team.dto';
+import { Team } from './entities/team.entity';
+import { PrismaService } from '../../prisma/prisma.service';
 
 @Injectable()
 export class TeamService {
-  create(createTeamDto: CreateTeamDto) {
-    return 'This action adds a new team';
+  constructor(private readonly prisma: PrismaService) {}
+
+  async create(createTeamDto: CreateTeamDto): Promise<Team> {
+    try {
+      return await this.prisma.team.create({
+        data: createTeamDto,
+      });
+    } catch (error) {
+      throw new BadRequestException(error);
+    }
   }
 
-  findAll() {
-    return `This action returns all team`;
+  async findAll(): Promise<Team[]> {
+    try {
+      return await this.prisma.team.findMany();
+    } catch (error) {
+      throw new BadRequestException(error);
+    }
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} team`;
+  async findOne(id: string): Promise<Team> {
+    try {
+      return await this.prisma.team.findUnique({
+        where: { id },
+      });
+    } catch (error) {
+      if (error.code === 'P2025') {
+        throw new NotFoundException(error.meta.cause);
+      }
+      throw new BadRequestException(error);
+    }
   }
 
-  update(id: number, updateTeamDto: UpdateTeamDto) {
-    return `This action updates a #${id} team`;
+  async update(id: string, updateTeamDto: UpdateTeamDto): Promise<Team> {
+    try {
+      return await this.prisma.team.update({
+        where: { id },
+        data: updateTeamDto,
+      });
+    } catch (error) {
+      if (error.code === 'P2025') {
+        throw new NotFoundException(error.meta.cause);
+      }
+      throw new BadRequestException(error);
+    }
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} team`;
+  async remove(id: string): Promise<Team> {
+    try {
+      return await this.prisma.team.delete({
+        where: { id },
+      });
+    } catch (error) {
+      if (error.code === 'P2025') {
+        throw new NotFoundException(error.meta.cause);
+      }
+      throw new BadRequestException(error);
+    }
   }
 }
